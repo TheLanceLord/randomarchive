@@ -1,12 +1,12 @@
 {
-    "SECRET_KEY": "muhkey",
+    "SECRET_KEY": "{{SECRET_KEY}}",
     "SQLALCHEMY_DATABASE_URI": "sqlite:///site.db",
-    "MYSQL_USER": "root",
-    "MYSQL_PASSWORD": "CorrectHorseBatteryStaple",
-    "MYSQL_HOST": "35.239.57.147",
-    "MYSQL_DB": "randomarchive",
+    "MYSQL_USER": "{{MYSQL_USER}}",
+    "MYSQL_PASSWORD": "{{MYSQL_PASSWORD}}",
+    "MYSQL_HOST": "{{MYSQL_HOST}}",
+    "MYSQL_DB": "{{MYSQL_DB}}",
     "MYSQL_CURSORCLASS": "DictCursor",
-    "GCS_BUCKET_NAME": "randomarchive-djl-bucket",
-    "GCS_SERVICE_ACCOUNT_KEY": "3686ce4383f2c5f166bbe994c478ab450c506192",
-    "ORGANIZATION_ID": "433637338589"
+    "GCS_BUCKET_NAME": ""{{GCS_BUCKET_NAME}}"",
+    "GCS_SERVICE_ACCOUNT_KEY": "{{GCS_SERVICE_ACCOUNT_KEY}}",
+    "ORGANIZATION_ID": "{{ORGANIZATION_ID}}"
 }
