@@ -33,7 +33,7 @@ def login():
         return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
-        if 'bobbytables' in form.username.data:
+        if 'bobbytables' in form.email.data:
             abort(403)
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
