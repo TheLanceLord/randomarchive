@@ -17,6 +17,8 @@ def register():
     if form.validate_on_submit():
         if 'bobbytables' in form.username.data:
             abort(403)
+        if 'bobbytables' in form.email.data:
+            abort(403)
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         default_picture = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/default.jpg?organizationId=' + Config.ORGANIZATION_ID
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, image_file=default_picture)
@@ -57,6 +59,8 @@ def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if 'bobbytables' in form.username.data:
+            abort(403)
+        if 'bobbytables' in form.email.data:
             abort(403)
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
