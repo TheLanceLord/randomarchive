@@ -24,11 +24,13 @@ def upload_blob(source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
     bucket_name = Config.GCS_BUCKET_NAME
 
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(destination_blob_name)
+    gcs_upload_string = 'gsutil cp ' + source_file_name + ' gs://' + bucket_name + '/'
 
-    blob.upload_from_filename(source_file_name)
+    # Upload the file to GCS
+    os.system(gcs_upload_string)
+
+    # Clean up the file from the server since it is now on GCS
+    os.remove(source_file_name)
 
     print(
         "File {} uploaded to {}.".format(
