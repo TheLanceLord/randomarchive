@@ -1,0 +1,64 @@
+-- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
+--
+-- Host: localhost    Database: mysql
+-- ------------------------------------------------------
+-- Server version	5.7.25-google-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `randomarchive`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `randomarchive` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `randomarchive`;
+
+--
+-- Table structure for table `post`
+--
+
+DROP TABLE IF EXISTS `post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `post` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) DEFAULT NULL,
+  `date_posted` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `content` text,
+  `image_file` varchar(100) DEFAULT NULL,
+  `author` varchar(200) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post`
+--
+
+LOCK TABLES `post` WRITE;
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,'Sigmar Sayings #1','2020-02-15 01:17:31','A good soldier obeys without question. A good officer commands without doubt. -Warhammer 40k',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(2,'Sigmar Sayings #2','2020-02-15 01:12:40','Blessed is the mind too small for doubt. -Warhammer 40k',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(3,'Sigmar Sayings #3','2020-02-15 01:13:41','Knowledge is power, guard it well. -Warhammer 40k',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(4,'Sigmar Sayings #4','2020-02-15 01:14:14','An open mind is like a fortress with its gates unbarred and unguarded. -Warhammer 40k',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(5,'Sigmar Sayings #5','2020-02-15 01:17:08','Hope is the first step on the road to disappointment. -Warhammer 40k',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(6,'Sigmar Sayings #6','2020-02-15 01:17:20','Victory needs no explanation, defeat allows none. -Warhammer 40k',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(7,'Sigmar Sayings #7','2020-02-15 01:21:24','“At the end of the day, though he\'s been ferried through hell on a ship that\'s ten thousand years old to some godforsaken, war-torn rock; though he deployed from high orbit with nothing but a grav chute; though he is one of ten million men and women snatched from his home-world to fight a war he barely understands; though he has been given a weapon that fires small suns and may annihilate him as he fires because the knowledge of how it functions has been lost; though his company is supported by tractor-tanks that run on anything you can burn; though he wages war against a devouring hive-mind, ravenous demons and hordes of hyper-advanced aliens with strange technologies and sorcery he never dreamed existed; no one will remember his sacrifice, there will be no records of his deeds, no glorious parades in his honor, and no remembrance of his name. All he will earn is a shallow, unmarked grave on a forgotten world untold light-years from home.\r\n\r\nYet for all this thankless sacrifice a Guardsman is a man, just like you. He has no millennia-old genetic engineering, no prophetic leader, no miracles of faith. He has his lasgun, his orders, and those beside him. He is an Imperial Guardsman.\r\n\r\nAnd he will hold the line.” -Warhammer 40k',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(8,'Sigmar Sayings #8','2020-02-15 01:23:49','The first rule of unarmed combat is: don’t be unarmed. -Warhammer 40k',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(9,'Sigmar Sayings #9','2020-02-15 01:25:41','You would laugh monster. But let me remind you. Within this weak sack of meat and bone, uncared for by his god and wept for by none, beats a heart. A human heart, that carries with it the strength and courage of all mankind.Within that sack of meat is the hope, the will, and the fury of every man women and child from every corner of the Imperium. Within that weak sack of meat, festooned in thin armor and weapons only powerful in numbers , beats the heart of a man. And for ten thousand years, the hearts of men have beaten, strongly, in defiance of your so called \"powers\". For ten thousand years, your black crusades have been pushed back, beaten down, and made a mockery of, by weak sacks of flesh with cheap weapons and disposable equipment. For that weak sack of flesh that you so gleefully mock is no supersoldier, no immortal warrior, no creature cursed by chaos like you. He is a man, an Imperial Gaurdsman drawn from some forgotten corner of the Imperium to fight for his species and for the safety of the people he loves. He is a factory worker. a farmer, a storekeeper, a father, a brother, a son, a mere man. And against creatures like you teeming and numberless, powered by the wills of thirsting gods...He holds the line. He has held the line for ten thousand years. So what is your excuse, monster? -Warhammer 40k (see Pity the Guardsman)',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(10,'Sigmar Sayings #0','2020-02-15 01:26:36','\"They shall be my finest warriors, these men who give of themselves to me. Like clay I shall mould them, and in the furnace of war forge them. They will be of iron will and steely muscle. In great armour shall I clad them and with the mightiest guns will they be armed. They will be untouched by plague or disease, no sickness will blight them. They will have tactics, strategies and machines so that no foe can best them in battle. They are my bulwark against the Terror. They are the Defenders of Humanity. They are my Space Marines and they shall know no fear.\"\r\n— The Immortal God-Emperor of Mankind, Warhammer 40,000',NULL,'User(\'Sigmar\', \'sigmar@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/9e963fe5ea2c0b5d.jpg?organizationId=433637338589\')',6),(11,'Narrator Quotes #0','2020-02-19 00:49:33','A little hope, however desperate is never without worth. -Darkest Dungeon',NULL,'User(\'Ancestor\', \'ancestor@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/d4f51638bad137a7.jpg?organizationId=433637338589\')',7),(12,'Narrator Quotes #1','2020-02-19 00:50:18','Alone in the woods or tunnels, survival is the same. Prepare, persist, and overcome. -Darkest Dungeon',NULL,'User(\'Ancestor\', \'ancestor@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/d4f51638bad137a7.jpg?organizationId=433637338589\')',7),(13,'Narrator Quotes #2','2020-02-19 00:51:54','And now the true test. Hold fast! Or expire. -Darkest Dungeon',NULL,'User(\'Ancestor\', \'ancestor@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/d4f51638bad137a7.jpg?organizationId=433637338589\')',7),(14,'Narrator Quotes #3','2020-02-19 00:52:21','Without tools of iron you must rely on flesh, an indefatigable purpose. -Darkest Dungeon',NULL,'User(\'Ancestor\', \'ancestor@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/d4f51638bad137a7.jpg?organizationId=433637338589\')',7),(15,'Narrator Quotes #4','2020-02-19 00:53:48','A moment of valor shines brightest against the backdrop of despair. -Darkest Dungeon',NULL,'User(\'Ancestor\', \'ancestor@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/d4f51638bad137a7.jpg?organizationId=433637338589\')',7),(16,'Narrator Quotes #5','2020-02-19 00:54:46','Many fall in the face of chaos; but not this one, not today. -Darkest Dungeon',NULL,'User(\'Ancestor\', \'ancestor@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/d4f51638bad137a7.jpg?organizationId=433637338589\')',7),(17,'Shan Yu\'s Favorites #0','2020-02-27 00:23:40','\"Live with a man 40 years. Share his house, his meals. Speak on every subject. Then tie him up, and hold him over the volcano\'s edge. And on that day, you will finally meet the man.\" -Shan Yu (Firefly)',NULL,'User(\'Shan Yu\', \'shanyu@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/dd0004b0cacca85a.jpg?organizationId=433637338589\')',8),(18,'Shan Yu\'s Favorites #1','2020-02-27 17:41:00','\"Curse your sudden but inevitable betrayal!\" -Wash (Firefly)',NULL,'User(\'Shan Yu\', \'shanyu@fakemail.com\', \'https://storage.cloud.google.com/randomarchive-djl/dd0004b0cacca85a.jpg?organizationId=433637338589\')',8);
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-03-05 19:23:38
