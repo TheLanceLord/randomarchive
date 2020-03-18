@@ -1,11 +1,10 @@
 {
-    "SECRET_KEY": "{{SECRET_KEY}}",
+    "SECRET_KEY": "nevernameyourkeythis",
     "SQLALCHEMY_DATABASE_URI": "sqlite:///site.db",
-    "MYSQL_USER": "{{MYSQL_USER}}",
-    "MYSQL_PASSWORD": "{{MYSQL_PASSWORD}}",
+    "MYSQL_USER": "root",
+    "MYSQL_PASSWORD": "CorrectHorseBatteryStaple",
     "MYSQL_HOST": "{{MYSQL_HOST}}",
-    "MYSQL_DB": "{{MYSQL_DB}}",
+    "MYSQL_DB": "randomarchive",
     "MYSQL_CURSORCLASS": "DictCursor",
-    "GCS_BUCKET_NAME": "{{GCS_BUCKET_NAME}}",
-    "ORGANIZATION_ID": "{{ORGANIZATION_ID}}"
+    "GCS_BUCKET_NAME": "{{GCS_BUCKET_NAME}}"
 }
