@@ -13,5 +13,3 @@ class Config:
     MYSQL_DB = config.get('MYSQL_DB')
     MYSQL_CURSORCLASS = config.get('MYSQL_CURSORCLASS')
     GCS_BUCKET_NAME = config.get('GCS_BUCKET_NAME')
-    GCS_SERVICE_ACCOUNT_KEY = config.get('GCS_SERVICE_ACCOUNT_KEY')
-    ORGANIZATION_ID = config.get('ORGANIZATION_ID')
