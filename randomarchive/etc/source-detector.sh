@@ -12,7 +12,7 @@ do
         RANDOMARCHIVE_BUCKET=${RANDOMARCHIVE_BUCKET%'/'}
         if [ $RANDOMARCHIVE_BUCKET != "" ] 
         then
-                sed -i '9s/.*/    "GCS_BUCKET_NAME": "'"$RANDOMARCHIVE_BUCKET"'",/' config.json
+                sed -i '9s/.*/    "GCS_BUCKET_NAME": "'"$RANDOMARCHIVE_BUCKET"'"/' config.json
         fi
         sleep 300
 done
