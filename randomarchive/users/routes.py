@@ -20,8 +20,21 @@ def register():
         if 'bobbytables' in form.email.data:
             abort(403)
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        default_picture = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/default.jpg?organizationId=' + Config.ORGANIZATION_ID
+        default_picture = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/default.jpg?cloudshell=true&orgonly=true&supportedpurview=organizationId'
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, image_file=default_picture)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been created! You are now able to log in', 'success')
+        return redirect(url_for('users.login'))
+    if request.method == 'POST' and request.headers['Content-Type'] == 'application/json':
+        payload = json.loads(request.data)
+        if 'bobbytables' in payload["username"]:
+            abort(403)
+        if 'bobbytables' in payload["email"]:
+            abort(403)
+        hashed_password = bcrypt.generate_password_hash(payload["password"]).decode('utf-8')
+        default_picture = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/default.jpg?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+        user = User(username=payload["username"], email=payload["email"], password=hashed_password, image_file=default_picture)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
