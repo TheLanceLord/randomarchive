@@ -14,5 +14,6 @@ do
         then
                 sed -i '9s/.*/    "GCS_BUCKET_NAME": "'"$RANDOMARCHIVE_BUCKET"'"/' config.json
         fi
+        sudo supervisorctl reload
         sleep 300
 done
