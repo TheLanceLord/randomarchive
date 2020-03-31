@@ -14,6 +14,17 @@ do
         then
                 sed -i '9s/.*/    "GCS_BUCKET_NAME": "'"$RANDOMARCHIVE_BUCKET"'"/' config.json
         fi
+
+        ISBREAKAGEZERO=$(echo "SELECT is_active FROM breakage_scenario WHERE scenario=0;" | mysql -N --database=randomarchive --host=$RANDOMARCHIVESQL_IP --user=root --password=CorrectHorseBatteryStaple)
+        if [ $ISBREAKAGEZERO -eq 1 ] 
+        then
+                sed -i '4s/.*/    "MYSQL_USER": "elliott",/' config.json
+                sed -i '5s/.*/    "MYSQL_PASSWORD": "Password123",/' config.json
+        else
+                sed -i '4s/.*/    "MYSQL_USER": "root",/' config.json
+                sed -i '5s/.*/    "MYSQL_PASSWORD": "CorrectHorseBatteryStaple",/' config.json
+        fi
+
         sudo supervisorctl reload
         sleep 300
 done
