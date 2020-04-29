@@ -8,7 +8,7 @@ do
         RANDOMARCHIVESQL_IP=$(awk 'NR == 2 {print $6}' privateip.txt)
         #echo "Current randomarchive sql private ip is: $RANDOMARCHIVESQL_IP"
         ISBREAKAGEZERO=$(echo "SELECT is_active FROM breakage_scenario WHERE scenario=2;" | mysql -N --database=randomarchive --host="$RANDOMARCHIVESQL_IP" --user=root --password=CorrectHorseBatteryStaple)
-        #echo "Is breakage scenario 3 running?: $ISBREAKAGEZERO"
+        #echo "Is breakage scenario 2 running?: $ISBREAKAGEZERO"
         if [ $ISBREAKAGEZERO -eq 1 ] 
         then
                 for i in $(seq 1 1800)
