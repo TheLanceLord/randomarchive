@@ -38,6 +38,4 @@ def upload_blob(source_file_name, destination_blob_name):
         )
     )
     
-    picture_fn = 'https://storage.cloud.google.com/' + bucket_name + '/' + destination_blob_name + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'    
-    
-    return picture_fn
+    return destination_blob_name
