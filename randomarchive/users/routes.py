@@ -86,7 +86,7 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + destination_blob_name + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+    image_file = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + current_user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
