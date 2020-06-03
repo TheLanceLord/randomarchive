@@ -20,7 +20,7 @@ def register():
         if 'bobbytables' in form.email.data:
             abort(403)
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        default_picture = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/default.jpg?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+        default_picture = 'default.jpg'
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, image_file=default_picture)
         db.session.add(user)
         db.session.commit()
@@ -33,7 +33,7 @@ def register():
         if 'bobbytables' in payload["email"]:
             abort(403)
         hashed_password = bcrypt.generate_password_hash(payload["password"]).decode('utf-8')
-        default_picture = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/default.jpg?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+        default_picture = '/default.jpg'
         user = User(username=payload["username"], email=payload["email"], password=hashed_password, image_file=default_picture)
         db.session.add(user)
         db.session.commit()
@@ -86,7 +86,7 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    image_file = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + destination_blob_name + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
@@ -105,7 +105,7 @@ def user_posts(username):
         user = User.query.filter_by(id=result['user_id']).first()
         result['author.username'] = user.username
         result['author.email'] = user.email
-        result['author.image_file'] = user.image_file
+        result['author.image_file'] = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
         if results_per_page == 0:
             page_num = page_num + 1 
         result['page'] = page_num
