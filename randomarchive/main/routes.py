@@ -33,9 +33,11 @@ def home():
     #print(str(page))
     return render_template('home.html', posts=results, pages=page_num+1, page=page)
 
+
 @main.route("/about")
 def about():
-    return render_template('about.html', title='About')
+    architecture_diagram = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/RandomArchive%20Architecture?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+    return render_template('about.html', title='About', arch_diagram=architecture_diagram)
 
 
 @main.route("/search")
