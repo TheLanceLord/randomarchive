@@ -18,8 +18,6 @@ def save_picture(form_picture):
 
     picture_fn = upload_blob(picture_path, picture_fn)
     
-    os.remove(picture_path)
-    
     return picture_fn
 
 def upload_blob(source_file_name, destination_blob_name):
