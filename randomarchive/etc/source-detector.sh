@@ -7,9 +7,10 @@ do
         then
                 sed -i '6s/.*/    "MYSQL_HOST": "'"$RANDOMARCHIVESQL_IP"'",/' config.json
         fi
+        # Use the first bucket found as our image bucket
         RANDOMARCHIVE_BUCKET=$(gsutil list)
         RANDOMARCHIVE_BUCKET=${RANDOMARCHIVE_BUCKET#'gs://'}
-        RANDOMARCHIVE_BUCKET=${RANDOMARCHIVE_BUCKET%'/'}
+        RANDOMARCHIVE_BUCKET=$(echo $RANDOMARCHIVE_BUCKET | cut -f1 -d"/")
         if [ $RANDOMARCHIVE_BUCKET != "" ] 
         then
                 sed -i '9s/.*/    "GCS_BUCKET_NAME": "'"$RANDOMARCHIVE_BUCKET"'"/' config.json
