@@ -2,6 +2,7 @@ from flask import render_template, request, Blueprint
 from randomarchive.main.forms import SearchForm
 from randomarchive.models import User
 from randomarchive import db, mysql
+from randomarchive.config import Config
 import MySQLdb.cursors
 
 main = Blueprint('main', __name__)
@@ -22,7 +23,7 @@ def home():
         user = User.query.filter_by(id=result['user_id']).first()
         result['author.username'] = user.username
         result['author.email'] = user.email
-        result['author.image_file'] = user.image_file
+        result['author.image_file'] = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
         if results_per_page == 0:
             page_num = page_num + 1 
         result['page'] = page_num
@@ -59,7 +60,7 @@ def search_posts(searchterm):
         user = User.query.filter_by(id=result['user_id']).first()
         result['author.username'] = user.username
         result['author.email'] = user.email
-        result['author.image_file'] = user.image_file
+        result['author.image_file'] = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
         if results_per_page == 0:
             page_num = page_num + 1 
         result['page'] = page_num
