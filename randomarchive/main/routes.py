@@ -36,7 +36,7 @@ def home():
 
 @main.route("/about")
 def about():
-    architecture_diagram = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/RandomArchive%20Architecture?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+    architecture_diagram = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/RandomArchive%20Architecture.jpg?cloudshell=true&orgonly=true&supportedpurview=organizationId'
     return render_template('about.html', title='About', arch_diagram=architecture_diagram)
 
 
