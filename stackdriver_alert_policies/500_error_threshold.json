@@ -21,7 +21,7 @@
                 "filter": "metric.label.response_code>=\"500\" AND
                           metric.label.response_code<\"600\" AND
                           metric.type=\"loadbalancing.googleapis.com/https/request_count\" AND
-                          project=\"sre-training-dev\" AND
+                          project=\"<YOUR_PROJECT>\" AND
                           resource.type=\"https_lb_rule\"",
                 "thresholdValue": 5,
                 "trigger": {
