@@ -1,0 +1,33 @@
+{
+    "displayName": "400 error threshold",
+    "combiner": "OR",
+    "conditions": [
+        {
+            "displayName": "400 error count is too high",
+            "conditionThreshold": {
+                "aggregations": [
+                    {
+                        "alignmentPeriod": "60s",
+                        "crossSeriesReducer": "REDUCE_SUM",
+                        "groupByFields": [
+                            "project",
+                            "metric.label.response_code"
+                        ],
+                        "perSeriesAligner": "ALIGN_MAX"
+                    }
+                ],
+                "comparison": "COMPARISON_GT",
+                "duration": "0s",
+                "filter": "metric.label.response_code>=\"400\" AND
+                          metric.label.response_code<\"500\" AND
+                          metric.type=\"loadbalancing.googleapis.com/https/request_count\" AND
+                          project=\"sre-training-dev\" AND
+                          resource.type=\"https_lb_rule\"",
+                "thresholdValue": 2,
+                "trigger": {
+                    "count": 1
+                }
+            }
+        }
+    ],
+}
