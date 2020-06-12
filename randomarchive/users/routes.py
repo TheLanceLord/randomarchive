@@ -86,7 +86,7 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + current_user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+    image_file = 'https://storage.googleapis.com/' + Config.GCS_BUCKET_NAME + '/' + current_user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
@@ -105,7 +105,7 @@ def user_posts(username):
         user = User.query.filter_by(id=result['user_id']).first()
         result['author.username'] = user.username
         result['author.email'] = user.email
-        result['author.image_file'] = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+        result['author.image_file'] = 'https://storage.googleapis.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
         if results_per_page == 0:
             page_num = page_num + 1 
         result['page'] = page_num
