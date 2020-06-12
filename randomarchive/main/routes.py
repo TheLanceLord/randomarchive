@@ -23,7 +23,7 @@ def home():
         user = User.query.filter_by(id=result['user_id']).first()
         result['author.username'] = user.username
         result['author.email'] = user.email
-        result['author.image_file'] = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+        result['author.image_file'] = 'https://storage.googleapis.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
         if results_per_page == 0:
             page_num = page_num + 1 
         result['page'] = page_num
@@ -36,7 +36,7 @@ def home():
 
 @main.route("/about")
 def about():
-    architecture_diagram = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/RandomArchive%20Architecture.jpg?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+    architecture_diagram = 'https://storage.googleapis.com/' + Config.GCS_BUCKET_NAME + '/RandomArchive%20Architecture.jpg?cloudshell=true&orgonly=true&supportedpurview=organizationId'
     return render_template('about.html', title='About', arch_diagram=architecture_diagram)
 
 
