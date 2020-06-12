@@ -40,7 +40,7 @@ def post(post_id):
     user = User.query.filter_by(id=results[0]['user_id']).first()
     results[0]['author.username'] = user.username
     results[0]['author.email'] = user.email
-    results[0]['author.image_file'] = 'https://storage.cloud.google.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
+    results[0]['author.image_file'] = 'https://storage.googleapis.com/' + Config.GCS_BUCKET_NAME + '/' + user.image_file + '?cloudshell=true&orgonly=true&supportedpurview=organizationId'
     return render_template('post.html', title=results[0]['title'], post=results[0])
 
 
