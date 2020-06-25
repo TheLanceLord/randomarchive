@@ -1,7 +1,7 @@
 #!/bin/sh
 while true
 do
-        gcloud sql instances list --filter="NAME=randomarchive">privateip.txt
+        gcloud sql instances list --filter="NAME ~ randomarchive">privateip.txt
         RANDOMARCHIVESQL_IP=$(awk 'NR == 2 {print $6}' privateip.txt)
         if [ $RANDOMARCHIVESQL_IP != "" ]
         then
