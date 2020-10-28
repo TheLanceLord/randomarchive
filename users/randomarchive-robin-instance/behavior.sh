@@ -14,7 +14,7 @@ do
                 for i in $(seq 1 12)
                 do
                         curl -X POST http://"$RANDOMARCHIVELB_IP"/register -d @newuser.json -H 'Content-Type: application/json'
-                        sleep 15
+                        sleep 5
                 done
         else
                 for i in $(seq 1 12)
