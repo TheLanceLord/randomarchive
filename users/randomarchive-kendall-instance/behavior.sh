@@ -11,7 +11,7 @@ do
         #echo "Is breakage scenario 1 running?: $ISBREAKAGEZERO"
         if [ $ISBREAKAGEZERO -eq 1 ] 
         then
-                gcloud compute firewall-rules list --filter="NAME=randomarchive-network-rule">firewall.txt
+                gcloud compute firewall-rules list --filter="NAME ~ randomarchive-network-rule">firewall.txt
                 [ -s /user/firewall.txt ]
                 if [ $? -eq 1 ]
                 then
@@ -23,7 +23,7 @@ do
                         sleep 5
                 done
         else
-                gcloud compute firewall-rules list --filter="NAME=randomarchive-network-rule">firewall.txt
+                gcloud compute firewall-rules list --filter="NAME ~ randomarchive-network-rule">firewall.txt
                 [ -s /user/firewall.txt ]
                 if [ $? -eq 0 ]
                 then
