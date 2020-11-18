@@ -11,11 +11,12 @@ do
         #echo "Is breakage scenario 1 running?: $ISBREAKAGEZERO"
         if [ $ISBREAKAGEZERO -eq 1 ] 
         then
-                gcloud compute firewall-rules list --filter="NAME ~ randomarchive-network-rule">firewall.txt
+                gcloud compute firewall-rules list --filter="NAME ~ randomarchive-network-security-rule">firewall.txt
                 [ -s /user/firewall.txt ]
                 if [ $? -eq 1 ]
                 then
-                        gcloud compute --project=sre-training-dev firewall-rules create randomarchive-network-rule --direction=INGRESS --priority=999 --network=default --action=DENY --rules=tcp:80 --source-ranges=35.191.0.0/16,209.85.152.0/22,209.85.204.0/22 --target-tags=allow-external-traffic
+                        RANDOMARCHIVEPROJECT_ID=$(gcloud config list project --format 'value(core.project)')
+                        gcloud compute --project="$RANDOMARCHIVEPROJECT_ID" firewall-rules create randomarchive-network-security-rule --direction=INGRESS --priority=999 --network=default --action=DENY --rules=tcp:80 --source-ranges=35.191.0.0/16,209.85.152.0/22,209.85.204.0/22 --target-tags=allow-external-traffic
                 fi
                 for i in $(seq 1 12)
                 do
@@ -23,11 +24,11 @@ do
                         sleep 5
                 done
         else
-                gcloud compute firewall-rules list --filter="NAME ~ randomarchive-network-rule">firewall.txt
+                gcloud compute firewall-rules list --filter="NAME ~ randomarchive-network-security-rule">firewall.txt
                 [ -s /user/firewall.txt ]
                 if [ $? -eq 0 ]
                 then
-                        yes | gcloud compute firewall-rules delete randomarchive-network-rule
+                        yes | gcloud compute firewall-rules delete randomarchive-network-security-rule
                 fi
                 for i in $(seq 1 12)
                 do
