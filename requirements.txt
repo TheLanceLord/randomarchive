@@ -41,5 +41,5 @@ six==1.11.0
 SQLAlchemy==1.2.7
 urllib3==1.25.8
 virtualenv==16.7.9
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 WTForms==2.1
