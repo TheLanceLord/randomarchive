@@ -23,7 +23,7 @@
                           metric.type=\"loadbalancing.googleapis.com/https/request_count\" AND
                           project=\"<YOUR_PROJECT>\" AND
                           resource.type=\"https_lb_rule\"",
-                "thresholdValue": 5,
+                "thresholdValue": 20,
                 "trigger": {
                     "count": 1
                 }
