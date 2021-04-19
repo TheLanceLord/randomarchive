@@ -7,7 +7,7 @@
             "conditionThreshold": {
                 "aggregations": [
                     {
-                        "alignmentPeriod": "60s",
+                        "alignmentPeriod": "300s",
                         "crossSeriesReducer": "REDUCE_SUM",
                         "groupByFields": [
                             "project",
@@ -17,7 +17,7 @@
                     }
                 ],
                 "comparison": "COMPARISON_GT",
-                "duration": "0s",
+                "duration": "300s",
                 "filter": "metric.label.response_code>=\"500\" AND
                           metric.label.response_code<\"600\" AND
                           metric.type=\"loadbalancing.googleapis.com/https/request_count\" AND
