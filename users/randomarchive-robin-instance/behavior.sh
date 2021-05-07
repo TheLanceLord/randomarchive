@@ -1,8 +1,8 @@
 #!/bin/sh
+sudo apt-get install -y jq
 while true
 do        
-        gcloud compute forwarding-rules list --filter="NAME ~ randomarchive">loadbalancer.txt
-        RANDOMARCHIVELB_IP=$(awk 'NR == 2 {print $3}' loadbalancer.txt)
+        RANDOMARCHIVELB_IP=$(gcloud compute forwarding-rules list --filter="NAME ~ randomarchive" --format=json | jq -r '.[] | .IPAddress')
         #echo "Current randomarchive loadbalancer ip is: $RANDOMARCHIVELB_IP"
         gcloud sql instances list --filter="NAME ~ randomarchive">privateip.txt
         RANDOMARCHIVESQL_IP=$(awk 'NR == 2 {print $6}' privateip.txt)
@@ -14,7 +14,7 @@ do
                 for i in $(seq 1 12)
                 do
                         curl -X POST http://"$RANDOMARCHIVELB_IP"/register -d @newuser.json -H 'Content-Type: application/json'
-                        sleep 5
+                        sleep 15
                 done
         else
                 for i in $(seq 1 12)
