@@ -15,6 +15,7 @@ def register():
         return redirect(url_for('main.home'))
     form = RegistrationForm()
     if form.validate_on_submit():
+        # Refer to https://xkcd.com/327/
         if 'bobbytables' in form.username.data:
             abort(403)
         if 'bobbytables' in form.email.data:
