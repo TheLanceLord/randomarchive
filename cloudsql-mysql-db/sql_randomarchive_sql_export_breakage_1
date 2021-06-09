@@ -1,0 +1,87 @@
+-- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
+--
+-- Host: localhost    Database: mysql
+-- ------------------------------------------------------
+-- Server version	5.7.25-google-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `randomarchive`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `randomarchive` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `randomarchive`;
+
+--
+-- Table structure for table `breakage_scenario`
+--
+
+DROP TABLE IF EXISTS `breakage_scenario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `breakage_scenario` (
+  `scenario` int(11) DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `breakage_scenario`
+--
+
+LOCK TABLES `breakage_scenario` WRITE;
+/*!40000 ALTER TABLE `breakage_scenario` DISABLE KEYS */;
+INSERT INTO `breakage_scenario` VALUES (0,0),(1,1),(2,0),(3,0),(4,0);
+/*!40000 ALTER TABLE `breakage_scenario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `post`
+--
+
+DROP TABLE IF EXISTS `post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `post` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) DEFAULT NULL,
+  `date_posted` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `content` text,
+  `image_file` varchar(100) DEFAULT NULL,
+  `author` varchar(200) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post`
+--
+
+LOCK TABLES `post` WRITE;
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (20,'The Raven','2020-06-03 18:06:07','And the raven, never flitting, still is sitting, still is sitting\r\nOn the pallid bust of Pallas just above my chamber door;\r\nAnd his eyes have all the seeming of a demon’s that is dreaming,\r\nAnd the lamp-light o’er him streaming throws his shadow on the floor;\r\nAnd my soul from out that shadow that lies floating on the floor\r\n                         Shall be lifted—nevermore!\r\n\r\n-Edgar Allan Poe, The Works of Edgar Allan Poe, The Raven Edition Table Of Contents And Index Of The Five Volumes',NULL,'User(\'Fry\', \'fry@fakemail.com\', \'cd10192d4d6aff38.jpg\')',8),(21,'Alice\'s Adventures in Wonderland','2020-06-03 18:10:33','... thought Alice, and she went on. “Would you tell me, please, which way I ought to go from here?”\r\n“That depends a good deal on where you want to get to,” said the Cat.\r\n“I don’t much care where—” said Alice.\r\n“Then it doesn’t matter which way you go,” said the Cat.\r\n\r\n-Lewis Carroll, Alice\'s Adventures in Wonderland',NULL,'User(\'Fry\', \'fry@fakemail.com\', \'cd10192d4d6aff38.jpg\')',8),(22,'Alice\'s Adventures in Wonderland','2020-06-03 18:14:24','Alice thought to herself, “I don’t see how he can ever finish, if he doesn’t begin.”\r\n\r\n-Lewis Carroll, Alice\'s Adventures in Wonderland',NULL,'User(\'Fry\', \'fry@fakemail.com\', \'cd10192d4d6aff38.jpg\')',8),(23,'Moby Dick','2020-06-03 18:31:29','Ignorance is the parent of fear\r\n\r\n-Herman Melville, Moby Dick; or The Whale',NULL,'User(\'Fry\', \'fry@fakemail.com\', \'cd10192d4d6aff38.jpg\')',8),(24,'Moby Dick','2020-06-03 18:33:37','Call me Ishmael.\r\n\r\n-Herman Melville, Moby Dick; or The Whale',NULL,'User(\'Fry\', \'fry@fakemail.com\', \'cd10192d4d6aff38.jpg\')',8),(25,'A Tale of Two Cities','2020-06-03 18:51:51','It was the best of times,\r\nit was the worst of times,\r\nit was the age of wisdom,\r\nit was the age of foolishness,\r\nit was the epoch of belief,\r\nit was the epoch of incredulity,\r\nit was the season of Light,\r\nit was the season of Darkness,\r\nit was the spring of hope,\r\nit was the winter of despair\r\n\r\n-Charles Dickens, A Tale of Two Cities',NULL,'User(\'Leo\', \'leo@fakemail.com\', \'576858f27ff96d9c.jpg\')',7),(26,'The Importance of Being Earnest','2020-06-03 19:00:49','Jack:  How can you sit there, calmly eating muffins when we are in this horrible trouble, I can’t make out.  You seem to me to be perfectly heartless.\r\nAlgernon:  Well, I can’t eat muffins in an agitated manner.  The butter would probably get on my cuffs.  One should always eat muffins quite calmly.  It is the only way to eat them.\r\nJack:  I say it’s perfectly heartless your eating muffins at all, under the circumstances.\r\n\r\n-Oscar Wilde, The Importance of Being Earnest',NULL,'User(\'Leo\', \'leo@fakemail.com\', \'576858f27ff96d9c.jpg\')',7),(27,'The Importance of Being Earnest','2020-06-03 19:34:24','Jack:  I am sick to death of cleverness.  Everybody is clever nowadays.  You can’t go anywhere without meeting clever people.  The thing has become an absolute public nuisance.\r\n\r\n-Oscar Wilde, The Importance of Being Earnest',NULL,'User(\'Leo\', \'leo@fakemail.com\', \'576858f27ff96d9c.jpg\')',7),(28,'The Importance of Being Earnest','2020-06-03 19:35:29','Algernon: The truth is rarely pure and never simple.\r\n\r\n-Oscar Wilde, The Importance of Being Earnest',NULL,'User(\'Leo\', \'leo@fakemail.com\', \'576858f27ff96d9c.jpg\')',7),(29,'The Importance of Being Earnest','2020-06-03 19:36:32','Algernon:  All women become like their mothers.  That is their tragedy.  No man does.  That’s his.\r\n\r\n-Oscar Wilde, The Importance of Being Earnest',NULL,'User(\'Leo\', \'leo@fakemail.com\', \'576858f27ff96d9c.jpg\')',7),(30,'Heart of Darkness','2020-06-03 19:45:02','I don\'t like work—no man does—but I like what is in the work—the chance to find yourself. Your own reality—for yourself, not for others—what no other man can ever know. They can only see the mere show, and never can tell what it really means.\r\n\r\n-Joseph Conrad, Heart of Darkness',NULL,'User(\'Checkers\', \'checkers@fakemail.com\', \'cb1b64d935b21673.jpg\')',6),(31,'War and Peace','2020-06-03 19:54:37','All we can know is that we know nothing. And that’s the height of human wisdom.\r\n\r\n-Leo Tolstoy, War and Peace',NULL,'User(\'Checkers\', \'checkers@fakemail.com\', \'cb1b64d935b21673.jpg\')',6),(32,'The Iliad','2020-06-03 20:15:50','Who dares think one thing, and another tell,\r\nMy heart detests him as the gates of hell.\r\n-Homer, The Iliad',NULL,'User(\'Checkers\', \'checkers@fakemail.com\', \'cb1b64d935b21673.jpg\')',6),(33,'Great Expectations','2020-06-03 20:26:16','... suffering has been stronger than all other teaching, and has taught me to understand what your heart used to be. I have been bent and broken, but—I hope—into a better shape.\r\n\r\n-Charles Dickens, Great Expectations',NULL,'User(\'Checkers\', \'checkers@fakemail.com\', \'cb1b64d935b21673.jpg\')',6);
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-06-03 21:25:12
