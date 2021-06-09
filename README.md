@@ -32,11 +32,11 @@ You are a new hire with Random Archive Inc. a small blog site with hopes of maki
 
 # breakage scenario #2
 You are a new hire with Random Archive Inc. a small blog site with hopes of making it big! Today, you and your team are working on the postmortem from your last incident when your boss walks up to your section. 
-“Hey team, we are seeing a spike in 500 errors on the site. We haven’t heard many customer complaints, but we want to get this sorted before it turns into something big.”
+“Hey team, we are seeing a spike in our site's CPU utilization. We haven’t heard many customer complaints, but we want to get this sorted before it turns into something big.”
 
 # breakage scenario #3
 You are a new hire with Random Archive Inc. a small blog site with hopes of making it big! Today, you and your team are updating your playbooks when your boss comes by and knocks on your desk. 
-“So... we are seeing a spike in our site's CPU utilization. We haven’t heard any customer complaints, but we want to get this sorted before it turns into something big.”
+“So... we are seeing a spike in 400 errors for some reason. We haven’t heard any customer complaints, but we want to get this sorted before it turns into something big.”
 
 # additional reading material
 https://sre.google/books/ has free reading material to help you on your Site Reliability Engineering journey. It is strongly encouraged that you read these books to get the most out of these labs.
