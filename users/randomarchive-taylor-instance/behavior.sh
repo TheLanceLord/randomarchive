@@ -1,6 +1,6 @@
 #!/bin/sh
 #####################################################################################################################
-# IMPORTANT - BEFORE YOU PROCEED!!!!                                                                                
+# IMPORTANT - READ BEFORE YOU PROCEED!!!!                                                                                
 # If you are doing this breakage lab as part of an instructor-led training, we ask that you don't look through the 
 # user behavior code, as in a real world scenario you wouldn't have a convenient script readily available that
 # tells you what a user is doing. If you have questions about a users behavior feel free to ask your instructor!
