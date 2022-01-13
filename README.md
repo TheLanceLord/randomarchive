@@ -12,85 +12,96 @@ CURRENT_PROJECT_NUMBER=$(gcloud projects list --format 'value(PROJECT_NUMBER)' -
 ```
 ////////////////////////////////////////// \
 Step 1: Enable all APIs and Services: \
-gcloud services enable compute.googleapis.com \
-gcloud services enable logging.googleapis.com \
-gcloud services enable sqladmin.googleapis.com \
-gcloud services enable pubsub.googleapis.com \
-gcloud services enable monitoring.googleapis.com \
-gcloud services enable serviceusage.googleapis.com \
-gcloud services enable servicenetworking.googleapis.com \
+```
+gcloud services enable compute.googleapis.com
+gcloud services enable logging.googleapis.com
+gcloud services enable sqladmin.googleapis.com
+gcloud services enable pubsub.googleapis.com
+gcloud services enable monitoring.googleapis.com
+gcloud services enable serviceusage.googleapis.com
+gcloud services enable servicenetworking.googleapis.com
+```
 //////////////////////////////////////////
 
 ////////////////////////////////////////// \
 Step 2: Create GCS bucket with any name. Populate with images from GitHub \
 #Need to make the bucket uniform and grant allUsers Storage Object Viewer permission
-
+```
 gsutil mb -b -p $CURRENT_PROJECT_ID -c Standard -l US-CENTRAL1 gs://$CURRENT_PROJECT_NUMBER-randomarchive/
 
-curl '\'
+curl \
   -O \
-  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/f3184b202f0f94d4.jpg' \ 
+  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/f3184b202f0f94d4.jpg' 
 gsutil cp f3184b202f0f94d4.jpg gs://$CURRENT_PROJECT_NUMBER-randomarchive/
 
 curl \
   -O \
-  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/73b1072c2f219b33.jpg' \
+  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/73b1072c2f219b33.jpg'
 gsutil cp 73b1072c2f219b33.jpg gs://$CURRENT_PROJECT_NUMBER-randomarchive/
 
 curl \
   -O \
-  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/8dfdf38de52376dd.jpg' \
+  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/8dfdf38de52376dd.jpg'
 gsutil cp 8dfdf38de52376dd.jpg gs://<BUCKET_NAME>/
 
 curl \
   -O \
-  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/RandomArchive%20Architecture.jpg' \
+  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/RandomArchive%20Architecture.jpg'
 gsutil cp RandomArchive%20Architecture.jpg gs://<BUCKET_NAME>/
 
 curl \
   -O \
-  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/default.jpg' \
-gsutil cp default.jpg gs://<BUCKET_NAME>/ \
+  -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/default.jpg'
+gsutil cp default.jpg gs://<BUCKET_NAME>/
+```
 //////////////////////////////////////////
 
 ////////////////////////////////////////// \
-Step 3: Create CloudSQL MySQL database run the export code in GitHub user=root password=CorrectHorseBatteryStaple \
-gcloud --project=gcp-sre-training-stg beta sql instances create randomarchive `\ \
-       --network=default `\ \
-       --assign-ip `\ \
-       --tier=db-n1-standard-1 `\ \
-       --region=us-central1 `\ \
+Step 3: Create CloudSQL MySQL database run the export code in GitHub user=root password=CorrectHorseBatteryStaple
+```
+gcloud --project=gcp-sre-training-stg beta sql instances create randomarchive \
+       --network=default \
+       --assign-ip \
+       --tier=db-n1-standard-1 \
+       --region=us-central1 \
        --version=MYSQL_5_7
 
-gcloud sql users set-password root --host=% --instance randomarchive --password CorrectHorseBatteryStaple \
+gcloud sql users set-password root --host=% --instance randomarchive --password CorrectHorseBatteryStaple
 
 curl \
   -O \
   -L 'https://github.com/ragingrancher/randomarchive/raw/master/cloudsql-mysql-db/randomarchive_sql_export'
   
-gcloud sql connect randomarchive --user=root --password=CorrectHorseBatteryStaple \
+gcloud sql connect randomarchive --user=root --password=CorrectHorseBatteryStaple
 mysql --user=root --password=CorrectHorseBatteryStaple --host=<'sql_public_ip'> < "randomarchive_sql_export"
 
 #https://github.com/ragingrancher/randomarchive/blob/master/cloudsql-mysql-db/randomarchive_sql_export
 
 #cloudsql-mysql-db/randomarchive_sql_export \
+```
 //////////////////////////////////////////
 
 ////////////////////////////////////////// \
-Step 4: Create randomarchive-webapp-rule \
-gcloud compute --project=$CURRENT_PROJECT_ID firewall-rules create randomarchive-webapp-rule --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:80,tcp:443 --source-ranges=0.0.0.0/0 --target-tags=allow-external-traffic \
+Step 4: Create randomarchive-webapp-rule
+```
+gcloud compute --project=$CURRENT_PROJECT_ID firewall-rules create randomarchive-webapp-rule --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:80,tcp:443 --source-ranges=0.0.0.0/0 --target-tags=allow-external-traffic
+```
 //////////////////////////////////////////
 
 ////////////////////////////////////////// \
 Step 5: Create randomarchive-webapp-template \
-gcloud beta compute --project=[PROJECT_ID] instance-templates create randomarchive-webapp-template --machine-type=n1-standard-1 --network=projects/gcp-sre-training-dev/global/networks/default --network-tier=PREMIUM --metadata=startup-script=cd\ /randomarchive/randomarchive/etc/$'\n'sh\ source-detector.sh --maintenance-policy=MIGRATE --service-account=[PROJECT_NUMBER]-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=allow-external-traffic,http-server,https-server --image=randomarchive-webapp-image --image-project=gcp-sre-training-dev --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=randomarchive-webapp-template --reservation-affinity=any \
+```
+gcloud beta compute --project=[PROJECT_ID] instance-templates create randomarchive-webapp-template --machine-type=n1-standard-1 --network=projects/gcp-sre-training-dev/global/networks/default --network-tier=PREMIUM --metadata=startup-script=cd\ /randomarchive/randomarchive/etc/$'\n'sh\ source-detector.sh --maintenance-policy=MIGRATE --service-account=[PROJECT_NUMBER]-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append --tags=allow-external-traffic,http-server,https-server --image=randomarchive-webapp-image --image-project=gcp-sre-training-dev --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=randomarchive-webapp-template --reservation-affinity=any
+```
 //////////////////////////////////////////
 
 ////////////////////////////////////////// \
-Step 6: Create randomarchive-webapp-mig \
+Step 6: Create randomarchive-webapp-mig
+```
 gcloud compute --project=[PROJECT_ID] instance-groups managed create randomarchive-webapp-mig --base-instance-name=randomarchive-webapp-mig --template=randomarchive-webapp-template --size=1 --zone=us-central1-a
 
-gcloud beta compute --project "[PROJECT_ID]" instance-groups managed set-autoscaling "randomarchive-webapp-mig" --zone "us-central1-a" --cool-down-period "60" --max-num-replicas "1" --min-num-replicas "1" --target-cpu-utilization "0.6" --mode "off" \
+gcloud beta compute --project "[PROJECT_ID]" instance-groups managed set-autoscaling "randomarchive-webapp-mig" --zone "us-central1-a" --cool-down-period "60" --max-num-replicas "1" --min-num-replicas "1" --target-cpu-utilization "0.6" --mode "off"
+```
 //////////////////////////////////////////
 
 ////////////////////////////////////////// \
@@ -102,28 +113,37 @@ Step 7b: Create randomarchive-webapp-fe \
 
 ////////////////////////////////////////// \
 Step 8: Create 400_error_threshold and 500_error_threshold alerting policies in Monitoring (requires project id) \
-curl '\' \
-  -O `\ \
-  -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/400_error_threshold.json' \
-`# need to update with project id \
+```
+curl \
+  -O \
+  -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/400_error_threshold.json'
+```
+`# need to update the above file with your project id before proceeding
+```
 gcloud alpha monitoring policies create --policy-from-file="400_error_threshold.json"
-  
-curl `\ \
-  -O `\ \
-  -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/500_error_threshold.json' \
-`# need to update with project id \
+```
+``` 
+curl \
+  -O \
+  -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/500_error_threshold.json'
+```
+`# need to update the above file with your project id before proceeding
+```
 gcloud alpha monitoring policies create --policy-from-file="500_error_threshold.json" \
+```
 //////////////////////////////////////////
 
 ////////////////////////////////////////// \
-Step 9: Create internettraffic, robin, taylor, and kendall instances \
+Step 9: Create internettraffic, robin, taylor, and kendall instances
+```
 gcloud beta compute --project=<PROJECT_ID> instances create randomarchive-internettraffic-instance --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --metadata=startup-script=cd\ /user/$'\n'sh\ behavior.sh --maintenance-policy=MIGRATE --service-account=<PROJECT_NUMBER>-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.read_only --image=randomarchive-internettraffic-image --image-project=gcp-sre-training-dev --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=randomarchive-internettraffic-instance --reservation-affinity=any
 
 gcloud beta compute --project=<PROJECT_ID> instances create randomarchive-kendall-instance --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --metadata=startup-script=cd\ /user/$'\n'sh\ behavior.sh --maintenance-policy=MIGRATE --service-account=<PROJECT_NUMBER>-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/sqlservice.admin,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.read_only --image=randomarchive-kendall-image --image-project=gcp-sre-training-dev --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=randomarchive-kendall-instance --reservation-affinity=any
 
 gcloud beta compute --project=<PROJECT_ID> create randomarchive-robin-instance --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --metadata=startup-script=cd\ /user/$'\n'sh\ behavior.sh --maintenance-policy=MIGRATE --service-account=<PROJECT_NUMBER>-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/sqlservice.admin,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.read_only --image=randomarchive-robin-image --image-project=gcp-sre-training-dev --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=randomarchive-robin-instance --reservation-affinity=any
 
-gcloud beta compute --project=<PROJECT_ID> instances create randomarchive-taylor-instance --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --metadata=startup-script=cd\ /user/$'\n'sh\ behavior.sh --maintenance-policy=MIGRATE --service-account=<PROJECT_NUMBER>-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/sqlservice.admin,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.read_only --image=randomarchive-taylor-image --image-project=gcp-sre-training-dev --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=randomarchive-taylor-instance --reservation-affinity=any \
+gcloud beta compute --project=<PROJECT_ID> instances create randomarchive-taylor-instance --zone=us-central1-a --machine-type=n1-standard-1 --subnet=default --network-tier=PREMIUM --metadata=startup-script=cd\ /user/$'\n'sh\ behavior.sh --maintenance-policy=MIGRATE --service-account=<PROJECT_NUMBER>-compute@developer.gserviceaccount.com --scopes=https://www.googleapis.com/auth/sqlservice.admin,https://www.googleapis.com/auth/compute.readonly,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/trace.append,https://www.googleapis.com/auth/devstorage.read_only --image=randomarchive-taylor-image --image-project=gcp-sre-training-dev --boot-disk-size=10GB --boot-disk-type=pd-standard --boot-disk-device-name=randomarchive-taylor-instance --reservation-affinity=any
+```
 //////////////////////////////////////////
 
 
