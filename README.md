@@ -2,7 +2,11 @@
 Simple flask blog site for integration with MySQL and Google Cloud Storage. Intended for SRE training on GCP.
 
 # how to use
-After completing a breakage scenario, run `gcloud sql import sql randomarchive-sql gs://randomarchive-static-files/sql/sql_randomarchive_sql_export_healthy` from the command line to stop the scenario.
+After completing a breakage scenario, run 
+```
+gcloud sql import sql randomarchive-sql gs://randomarchive-static-files/sql/sql_randomarchive_sql_export_healthy
+``` 
+from the command line to stop the scenario.
 
 # setup
 Step 0: Set Environment Variables \
