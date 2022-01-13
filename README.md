@@ -104,13 +104,13 @@ Step 8: Create 400_error_threshold and 500_error_threshold alerting policies in 
 curl \
   -O \
   -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/400_error_threshold.json'
-# need to update with project id
+`# need to update with project id
 gcloud alpha monitoring policies create --policy-from-file="400_error_threshold.json"
   
 curl \
   -O \
   -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/500_error_threshold.json'
-# need to update with project id
+`# need to update with project id
 gcloud alpha monitoring policies create --policy-from-file="500_error_threshold.json"
 //////////////////////////////////////////
 
