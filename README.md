@@ -25,7 +25,7 @@ Step 2: Create GCS bucket with any name. Populate with images from GitHub \
 
 gsutil mb -b -p $CURRENT_PROJECT_ID -c Standard -l US-CENTRAL1 gs://$CURRENT_PROJECT_NUMBER-randomarchive/
 
-curl \
+curl '\'
   -O \
   -L 'https://github.com/ragingrancher/randomarchive/raw/master/gcs-assets/f3184b202f0f94d4.jpg' \ 
 gsutil cp f3184b202f0f94d4.jpg gs://$CURRENT_PROJECT_NUMBER-randomarchive/
@@ -100,7 +100,7 @@ Step 7b: Create randomarchive-webapp-fe \
 
 ////////////////////////////////////////// \
 Step 8: Create 400_error_threshold and 500_error_threshold alerting policies in Monitoring (requires project id) \
-curl `\ \
+curl '\' \
   -O `\ \
   -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/400_error_threshold.json' \
 `# need to update with project id \
