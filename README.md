@@ -76,12 +76,7 @@ curl \
   -O \
   -L 'https://github.com/ragingrancher/randomarchive/raw/master/cloudsql-mysql-db/randomarchive_sql_export'
   
-gcloud sql connect randomarchive --user=root --password=CorrectHorseBatteryStaple
-mysql --user=root --password=CorrectHorseBatteryStaple --host=<'sql_public_ip'> < "randomarchive_sql_export"
-
-#https://github.com/ragingrancher/randomarchive/blob/master/cloudsql-mysql-db/randomarchive_sql_export
-
-#cloudsql-mysql-db/randomarchive_sql_export \
+gcloud sql import sql randomarchive-sql gs://randomarchive-static-files/sql/sql_randomarchive_sql_export_healthy
 ```
 //////////////////////////////////////////
 
@@ -116,13 +111,13 @@ Step 7b: Create randomarchive-webapp-fe \
 //////////////////////////////////////////
 
 ////////////////////////////////////////// \
-Step 8: Create 400_error_threshold and 500_error_threshold alerting policies in Monitoring (requires project id) \
+Step 8: Create 400_error_threshold and 500_error_threshold alerting policies in Monitoring (requires project id)
 ```
 curl \
   -O \
   -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/400_error_threshold.json'
 ```
-`# need to update the above file with your project id before proceeding
+You will need to update the above file with your project id before proceeding
 ```
 gcloud alpha monitoring policies create --policy-from-file="400_error_threshold.json"
 ```
@@ -131,9 +126,9 @@ curl \
   -O \
   -L 'https://github.com/ragingrancher/randomarchive/raw/master/stackdriver_alert_policies/500_error_threshold.json'
 ```
-`# need to update the above file with your project id before proceeding
+You will need to update the above file with your project id before proceeding
 ```
-gcloud alpha monitoring policies create --policy-from-file="500_error_threshold.json" \
+gcloud alpha monitoring policies create --policy-from-file="500_error_threshold.json"
 ```
 //////////////////////////////////////////
 
