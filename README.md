@@ -6,10 +6,9 @@ After completing a breakage scenario, run `gcloud sql import sql randomarchive-s
 
 # setup
 Step 0: Set Environment Variables \
-```
-CURRENT_PROJECT_ID=$(gcloud config list --format 'value(core.project)') \
-CURRENT_PROJECT_NUMBER=$(gcloud projects list --format 'value(PROJECT_NUMBER)' --filter="PROJECT_ID:$CURRENT_PROJECT_ID") \
-```
+
+```CURRENT_PROJECT_ID=$(gcloud config list --format 'value(core.project)') \
+CURRENT_PROJECT_NUMBER=$(gcloud projects list --format 'value(PROJECT_NUMBER)' --filter="PROJECT_ID:$CURRENT_PROJECT_ID") \ ```
 ////////////////////////////////////////// \
 Step 1: Enable all APIs and Services: \
 gcloud services enable compute.googleapis.com \
