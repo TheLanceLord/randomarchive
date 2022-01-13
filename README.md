@@ -5,12 +5,9 @@ Simple flask blog site for integration with MySQL and Google Cloud Storage. Inte
 After completing a breakage scenario, run `gcloud sql import sql randomarchive-sql gs://randomarchive-static-files/sql/sql_randomarchive_sql_export_healthy` from the command line to stop the scenario.
 
 # setup
-Step 0: Set Environment Variables
-
-CURRENT_PROJECT_ID=$(gcloud config list --format 'value(core.project)')
-
-CURRENT_PROJECT_NUMBER=$(gcloud projects list --format 'value(PROJECT_NUMBER)' --filter="PROJECT_ID:$CURRENT_PROJECT_ID")
-
+Step 0: Set Environment Variables \
+CURRENT_PROJECT_ID=$(gcloud config list --format 'value(core.project)') \
+CURRENT_PROJECT_NUMBER=$(gcloud projects list --format 'value(PROJECT_NUMBER)' --filter="PROJECT_ID:$CURRENT_PROJECT_ID") \
 //////////////////////////////////////////
 
 Step 1: Enable all APIs and Services:
